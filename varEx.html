@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Variable scope</title>
+    </head>
+    <body>
+      <span id="result"></span>
+      <script>  
+       var data = "";
+       var x = 9;
+       data = x + "<br/>";
+       function func1() {
+         
+           var x = 10;
+           data = data + " now x is:" + x + "<br/>";
+       }
+       func1();
+       data = data + "outside x is:" + x + "<br/>";
+       document.getElementById("result").innerHTML = data;
+    </script>
+
+    
+    </body>
+</html>
