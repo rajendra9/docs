@@ -1,0 +1,28 @@
+<html>
+  <head>
+     <script type="text/javascript">
+     function show(msg){
+       document.getElementById("result").innerHTML = "<h2>" + msg + "</h2>";
+     }
+      function a(){
+       show('keyup');
+      }
+      function b(){
+       show('keydown');
+      }
+      function c(){
+       show('keypress');
+      }
+     </script>
+   </head>
+   <body>
+    <div align='center'>
+    
+    keyup check this--><input type="text" onkeyup=" return a()"><br/><br/>
+    keydown check this--><input type="text" onkeydown=" return b()"><br/><br/>   
+    keypress check this--><input type="text" onkeypress=" return c()">   
+    <!-- Alt,Ctrl,Shift,Esc won't work -->  
+     <span id="result"></span>
+   </div>
+  </body>
+ </html>   
