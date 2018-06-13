@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <meta charset="UTF-8"  />
+     <title>Effect of Let in Loops</title>     
+     <script>
+        function showStudent(stu){
+           return "Id:" + stu.stuId + " name:" + stu.name + " course:" + stu.course + " age:" + stu.age;
+        }
+        Student.prototype = {
+        name : {
+         value:'',
+         writable:true,
+         enumerable:true,
+         configurable:true
+         },
+         stuId :{ 
+          value:0,
+          writable:true,
+          enumerable:true,
+          configurable:true
+         }
+        };
+        function Student(id,name,cr,ag){
+            this.stuId = id;
+            this.name = name;
+        } 
+        var stu = new Student(100, 'Ravinder');
+        
+        Object.defineProperty(stu, 'course',{ 
+          value:'',
+          writable:true,
+          enumerable:true,
+          configurable:true
+         });
+         Object.defineProperty(stu,'age',{ 
+          value:0,
+          writable:true,
+          enumerable:true,
+          configurable:false
+         });
+        
+          function useStudent(){
+            var data = '';
+            stu.course = 'javascript';
+            stu.age = 23;
+            data = showStudent(stu);
+            delete stu.course;
+            delete stu.age; 
+            data += ' \r\nthis time:' + showStudent(stu);
+            document.getElementById('ta').value = data;
+         } 
+
+        
+      
+        
+       </script>
+      
+    </head>
+    <body>
+     <div  align="center">
+      <textarea id="ta" rows="16" cols="40" 
+      style="text-align:center;font-size:16px;font-weight:bold;color:blue;">       
+      </textarea>
+      <hr/>
+      <button onclick="useStudent()">Use student</button>
+    </div>     
+     
+    </body>
+</html>
