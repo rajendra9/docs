@@ -1,0 +1,63 @@
+'use strict';
+function doPromises(){
+let myPromise = new Promise((resolve, reject)=>{
+  setTimeout(function(){
+    resolve('Good to go'); 
+  },1000);
+  setTimeout(function(){
+    reject('uh oh'); 
+  },1100);    
+});
+
+let myPromiseTwo = new Promise((resolve,reject) => {
+    setTimeout(function(){
+    resolve('Promise Two , another promise'); 
+  },1500);
+}); 
+
+Promise.all([myPromise,myPromiseTwo])
+.then((data)=>{
+   console.log(data); 
+})
+.catch((err)=>{
+    console.log(err); 
+});
+}
+function showJokes(){
+  fetch('http://api.icndb.com/jokes/random/10')
+    .then((res)=>{
+      res.json().then((data)=>{
+        console.log(data);
+      } );
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+}
+
+function useRest(id){
+  let url = "http://localhost:10080/restex/rest/ang/all";
+  fetch(url)
+    .then((res)=>{
+      res.json().then((data)=>{
+        console.log(data);
+        document.getElementById(id).innerHTML = showInTable(data);
+      } );
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+}
+function showInTable(data){
+  data = JSON.stringify(data);
+  let objData = JSON.parse(data);
+  var data = '<table cellpadding="5" cellspacing="5"><tr><td>Adhar Id</td><td>';
+  data += 'Person Name</td><td>Date-of-Birth</td><td>Job</td><td>Income</td></tr>'
+  for(let obj of objData){
+    var jObj = JSON.stringify(obj)
+    var  person = JSON.parse(jObj);
+      data += '<tr><td>'+person.adharId+'</td><td>'+person.personName+'</td><td>'+person.dob+'</td><td>'+person.job+'</td><td>'+person.income+'</td></tr>';
+  }
+  data += '</table>';
+  return data;
+}
